@@ -24,8 +24,9 @@ catch(error)
 
 
  const getuser=async(id) =>{
-    const user= await User.findOne({username:id});
-    return user;
+    const temp1= await User.findOne({username:id});
+    
+    return {username:temp1.username,password:temp1.password,displayName:temp1.displayName,profilePic:temp1.profilePic};
  }
 
 

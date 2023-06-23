@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
     var profilepic = req.body.profilePic;
     if (!(await userservice.check(username))) {
         var temp1=await userservice.createUser(username, password, displayName, profilepic);
-        res.json({username:temp1.username,password:temp1.password,displayName:temp1.displayName,profilepic:temp1.profilePic});
+        res.json({username:temp1.username,password:temp1.password,displayName:temp1.displayName,profilePic:temp1.profilePic});
     }
     else {
         return res.status(409).json({ errors: ['there is a user like this'] });

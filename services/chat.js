@@ -44,7 +44,18 @@ const createchat = async (id, user, lastMessage, username) => {
     }
 
     const getchats=async(data) =>{
-        return await Chat.find({username:data});
+      var array = await Chat.find({ username: data });
+      var array2 = [];
+      
+      array.map((chat) => {
+        array2.push({
+          id: chat.id,
+          user: {username:chat.user.username,password:chat.user.password,displayName:chat.user.displayName,profilePic:chat.user.profilePic},
+          lastMessage: chat.lastMessage
+        });
+      });
+
+      return array2;      
     }
 
 
