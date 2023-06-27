@@ -6,6 +6,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 const jwt = require("jsonwebtoken");
 const path = require('path');
 const cors = require('cors');
+
 server.use(cors());
 
 require('custom-env').env(process.env.NODE_ENV, "./config");
@@ -80,10 +81,12 @@ server.use(express.urlencoded({limit: '50mb',extended: true}));
 const routeuser=require('./routes/user');
 const routtoken=require('./routes/tokens');
 const routchat=require('./routes/chat');
+const routtokenfirebase=require('./routes/firebase');
 server.use(express.static('public'));
 server.use('/api/Users',routeuser);
 routchat.setSocket(io);
 server.use('/api/Tokens',routtoken);
 server.use('/api/Chats',routchat.router);
+server.use('/api/firebase',routtokenfirebase);
 server2.listen(process.env.PORT);
 

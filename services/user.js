@@ -22,7 +22,6 @@ catch(error)
 }
 }
 
-
  const getuser=async(id) =>{
     const temp1= await User.findOne({username:id});
     

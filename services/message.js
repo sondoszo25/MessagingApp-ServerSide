@@ -1,5 +1,6 @@
 const Message=require('../models/message');
 const Chat=require('../models/chat');
+const firebaseservice=require('../services/firebase');
 
 
 const updateIO = (socketIO) => {
@@ -12,7 +13,9 @@ const createMessage=async(id,name,msg)=>{
         const lastmessage={id:id,created:message.created,content:msg};
         const result = await Chat.updateMany({ id: id }, { $set: { lastMessage: lastmessage } });
         io.emit('update',{foo:"bar"});
-        return await message.save();
+        var msgg =await message.save();
+        await firebaseservice.sendupdateMessage(id,sender);
+        return msgg;
 }
 
 const getMessage=async(id)=>{

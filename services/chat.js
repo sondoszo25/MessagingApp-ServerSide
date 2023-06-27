@@ -1,6 +1,7 @@
 const Chat=require('../models/chat');
 const User=require('../models/user');
 const Message=require('../models/message');
+const firebaseservice=require('../services/firebase');
 
 
 const updateIO = (socketIO) => {
@@ -18,6 +19,7 @@ const createchat = async (id, user, lastMessage, username) => {
       }
       io.emit('update',{foo:"bar"});
       await chat.save();
+      await firebaseservice.sendupdatecontact(id);
       return { id:id,user:{username:user.username,password:user.password,displayName:user.username,profilePic:user.profilePic}};
     } catch (error) {
       console.error(error);
@@ -67,6 +69,7 @@ const createchat = async (id, user, lastMessage, username) => {
       try {
         const deleteResult = await Chat.deleteMany({id:id});
         await Message.deleteMany({id:id});
+        await firebaseservice.sendupdatecontact(id);
        return true;
       } catch (error) {
         return false;
