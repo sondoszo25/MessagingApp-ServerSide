@@ -16,8 +16,21 @@ const createMessage=async(id,name,msg)=>{
 }
 
 const getMessage=async(id)=>{
-    const messages = await Message.find({ id: id }).sort({ _id: -1 });
-    return messages;
+
+    var array = await Message.find({ id: id }).sort({ _id: -1 });
+    var array2 = [];
+    
+    array.map((msg) => {
+      array2.push({
+        id: msg.id,
+        content:msg.content,
+        sender: {username:msg.sender.username},
+        created:msg.created
+      });
+    });
+
+
+    return array2;
    
 }
 
