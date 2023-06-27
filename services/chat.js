@@ -10,17 +10,17 @@ const updateIO = (socketIO) => {
 
 const createchat = async (id, user, lastMessage, username) => {
     try {
-      const chat = new Chat({ id, user, lastMessage, username });
+      const chat = new Chat({ id, user, lastMessage:null, username });
       const username2 = user.username;
       if(username !== username2){
       const user2 = await User.findOne({ username: username });
-      const chat2 = new Chat({ id, user: user2, lastMessage, username: username2 });
+      const chat2 = new Chat({ id, user: user2, lastMessage:null, username: username2 });
       await chat2.save();
       }
       io.emit('update',{foo:"bar"});
       await chat.save();
       await firebaseservice.sendupdatecontact(id);
-      return { id:id,user:{username:user.username,password:user.password,displayName:user.username,profilePic:user.profilePic}};
+      return { id:id,user:{username:user.username,password:user.password,displayName:user.username,profilePic:user.profilePic},lastMessage:lastMessage};
     } catch (error) {
       console.error(error);
       throw error;
@@ -64,6 +64,7 @@ const createchat = async (id, user, lastMessage, username) => {
     const getthechat=async(id) =>{
       return await Chat.find({id:id});
     };
+
     const deletethechat=async(id) =>{
       io.emit('update2',{foo:id});
       try {
