@@ -5,7 +5,7 @@ This part of the project involves setting up the server to handle requests from 
 # Overview:
 The client application, which is built in a separate repository, has been integrated into this server by running npm run build to generate a production-ready build folder. This folder is added to the server project, enabling the client to communicate with the server.
 The server runs on port 5000 and provides various REST API endpoints for chat functionality, user management, and token generation.
-API Endpoints
+# API Endpoints
 # 1. Chats
 Endpoint: http://localhost:5000/api/Chats
 * POST: Creates a new chat.
