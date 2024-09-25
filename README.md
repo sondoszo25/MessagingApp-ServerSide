@@ -38,13 +38,13 @@ Endpoint: http://localhost:5000/api/Chats/:id
 1. Ensure MongoDB is running on port 27017.
 2. Open a terminal in the server project directory.
 3. Run the following command to start the server:
-'''
+```
 npm start
 
-'''
+```
 Alternatively, you can use:
-'''
+```
 SET NODE_ENV=local && node server.js
 
-'''
-4. Once the server is running, open your browser and go to ''' http://localhost:5000 ''' to access the application.
+```
+4. Once the server is running, open your browser and go to  http://localhost:5000  to access the application.
